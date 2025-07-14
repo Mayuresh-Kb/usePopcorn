@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarRating from "./StarRating";
 
 const tempMovieData = [
   {
@@ -270,18 +271,21 @@ function MovieDetails({ selectedId, onCloseMovie }) {
     Genre: genre,
   } = movie;
 
-  useEffect(function () {
-    async function getMovieDetails() {
-      try {
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
-        );
-        const data = await res.json();
-        setMovie(data);
-      } catch (err) {}
-    }
-    getMovieDetails();
-  }, []);
+  useEffect(
+    function () {
+      async function getMovieDetails() {
+        try {
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+          );
+          const data = await res.json();
+          setMovie(data);
+        } catch (err) {}
+      }
+      getMovieDetails();
+    },
+    [selectedId]
+  );
   return (
     <div className="details">
       <header>
@@ -303,6 +307,9 @@ function MovieDetails({ selectedId, onCloseMovie }) {
       </header>
 
       <section>
+        <div className="rating">
+          <StarRating maxRating={10} size={24} />
+        </div>
         <p>
           <em>{plot}</em>
         </p>
