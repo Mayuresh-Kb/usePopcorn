@@ -8,7 +8,6 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 const KEY = process.env.REACT_APP_API_KEY;
-console.log(process.env.REACT_APP_API_KEY);
 
 export default function App() {
   const [query, setQuery] = useState("");
